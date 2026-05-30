@@ -1,36 +1,36 @@
 import React from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
 import { motion } from 'framer-motion'
 import { useWorkflow } from '../lib/workflowContext.jsx'
 
 /* ─── Default data ─── */
 const DEFAULT_DATA = {
   tasks: {
-    't1': { title: 'Define PRD & target personas',         priority: 'P0', sprint: 'Sprint 1', desc: 'User stories, success metrics, and project scope.' },
-    't2': { title: 'Competitive landscape research',       priority: 'P1', sprint: 'Sprint 1', desc: 'Audit top three competitors, find positioning gaps.' },
-    't3': { title: 'Wireframe intake and landing canvas',  priority: 'P0', sprint: 'Sprint 1', desc: 'Static mockups for CTA flows and user validation.' },
-    't4': { title: 'Gemini workflow parser backend',       priority: 'P0', sprint: 'Sprint 1', desc: 'Map raw prompts to strict JSON workflow models.' },
-    't5': { title: 'Drag-and-drop Kanban interface',       priority: 'P1', sprint: 'Sprint 2', desc: 'Column transitions with local state persistence.' },
-    't6': { title: 'Vite build & continuous deploy',       priority: 'P2', sprint: 'Sprint 2', desc: 'Minified assets and Vercel preview deployments.' },
+    't1': { title: 'Define PRD & target personas', priority: 'P0', sprint: 'Sprint 1', desc: 'User stories, success metrics, and project scope.' },
+    't2': { title: 'Competitive landscape research', priority: 'P1', sprint: 'Sprint 1', desc: 'Audit top three competitors, find positioning gaps.' },
+    't3': { title: 'Wireframe intake and landing canvas', priority: 'P0', sprint: 'Sprint 1', desc: 'Static mockups for CTA flows and user validation.' },
+    't4': { title: 'Gemini workflow parser backend', priority: 'P0', sprint: 'Sprint 1', desc: 'Map raw prompts to strict JSON workflow models.' },
+    't5': { title: 'Drag-and-drop Kanban interface', priority: 'P1', sprint: 'Sprint 2', desc: 'Column transitions with local state persistence.' },
+    't6': { title: 'Vite build & continuous deploy', priority: 'P2', sprint: 'Sprint 2', desc: 'Minified assets and Vercel preview deployments.' },
   },
   columns: {
-    todo:       { title: 'Todo',       taskIds: ['t1', 't2', 't3'] },
+    todo: { title: 'Todo', taskIds: ['t1', 't2', 't3'] },
     inprogress: { title: 'In Progress', taskIds: ['t4', 't5'] },
-    done:       { title: 'Done',       taskIds: ['t6'] },
+    done: { title: 'Done', taskIds: ['t6'] },
   },
   order: ['todo', 'inprogress', 'done'],
 }
 
 const PRIORITY_COLOR = {
   P0: { dot: '#ef4444', label: 'Critical' },
-  P1: { dot: '#7c6dfa', label: 'High'     },
+  P1: { dot: '#7c6dfa', label: 'High' },
   P2: { dot: 'rgba(255,255,255,0.25)', label: 'Low' },
 }
 
 const COLUMN_META = {
-  todo:       { accent: 'rgba(255,255,255,0.04)', indicator: 'rgba(255,255,255,0.3)' },
+  todo: { accent: 'rgba(255,255,255,0.04)', indicator: 'rgba(255,255,255,0.3)' },
   inprogress: { accent: 'rgba(124,109,250,0.06)', indicator: '#7c6dfa' },
-  done:       { accent: 'rgba(255,255,255,0.02)', indicator: 'rgba(134,239,172,0.7)' },
+  done: { accent: 'rgba(255,255,255,0.02)', indicator: 'rgba(134,239,172,0.7)' },
 }
 
 export default function SprintBoard() {
@@ -48,21 +48,21 @@ export default function SprintBoard() {
     workflow.sprintTasks.forEach((t, i) => {
       const id = `g${i}`
       tasks[id] = {
-        title:    t.title || `Task ${i + 1}`,
-        desc:     t.description || t.desc || '',
+        title: t.title || `Task ${i + 1}`,
+        desc: t.description || t.desc || '',
         priority: t.priority || 'P1',
-        sprint:   t.sprint || 'Sprint 1',
+        sprint: t.sprint || 'Sprint 1',
       }
-      if (i === 1 || i === 4)  inprogress.push(id)
-      else if (i === 2)        done.push(id)
-      else                     todo.push(id)
+      if (i === 1 || i === 4) inprogress.push(id)
+      else if (i === 2) done.push(id)
+      else todo.push(id)
     })
     setData({
       tasks,
       columns: {
-        todo:       { title: 'Todo',        taskIds: todo },
+        todo: { title: 'Todo', taskIds: todo },
         inprogress: { title: 'In Progress', taskIds: inprogress },
-        done:       { title: 'Done',        taskIds: done },
+        done: { title: 'Done', taskIds: done },
       },
       order: ['todo', 'inprogress', 'done'],
     })
@@ -72,7 +72,7 @@ export default function SprintBoard() {
     if (!destination) return
     if (destination.droppableId === source.droppableId && destination.index === source.index) return
 
-    const start  = data.columns[source.droppableId]
+    const start = data.columns[source.droppableId]
     const finish = data.columns[destination.droppableId]
 
     if (start === finish) {
@@ -83,7 +83,7 @@ export default function SprintBoard() {
       return
     }
 
-    const startIds  = Array.from(start.taskIds)
+    const startIds = Array.from(start.taskIds)
     startIds.splice(source.index, 1)
     const finishIds = Array.from(finish.taskIds)
     finishIds.splice(destination.index, 0, draggableId)
@@ -92,7 +92,7 @@ export default function SprintBoard() {
       ...prev,
       columns: {
         ...prev.columns,
-        [source.droppableId]:      { ...start,  taskIds: startIds  },
+        [source.droppableId]: { ...start, taskIds: startIds },
         [destination.droppableId]: { ...finish, taskIds: finishIds },
       },
     }))
@@ -129,9 +129,9 @@ export default function SprintBoard() {
           className="block sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3"
         >
           {data.order.map((colId, ci) => {
-            const col   = data.columns[colId]
+            const col = data.columns[colId]
             const tasks = col.taskIds.map(id => ({ id, ...data.tasks[id] }))
-            const meta  = COLUMN_META[colId]
+            const meta = COLUMN_META[colId]
 
             return (
               <motion.div
@@ -216,13 +216,12 @@ function TaskCard({ task, index }) {
               : hovered
                 ? 'rgba(255, 255, 255, 0.022)'
                 : 'rgba(255, 255, 255, 0.012)',
-            border: `1px solid ${
-              snapshot.isDragging
+            border: `1px solid ${snapshot.isDragging
                 ? 'var(--accent)'
                 : hovered
                   ? 'rgba(255, 255, 255, 0.09)'
                   : 'var(--border)'
-            }`,
+              }`,
             borderRadius: '10px',
             padding: '0.75rem 0.875rem',
             cursor: snapshot.isDragging ? 'grabbing' : 'grab',
@@ -250,7 +249,7 @@ function TaskCard({ task, index }) {
               <div style={{ width: '4.5px', height: '4.5px', borderRadius: '50%', background: pMeta.dot, flexShrink: 0 }} />
               <span style={{ fontSize: '0.625rem', color: 'var(--text-2)', fontWeight: 600, letterSpacing: '0.01em' }}>{pMeta.label}</span>
             </div>
-            
+
             <span style={{
               fontSize: '0.625rem',
               fontWeight: 700,
