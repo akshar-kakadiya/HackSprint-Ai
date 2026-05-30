@@ -1,16 +1,109 @@
-# React + Vite
+# HackSprint AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Transform Ideas into Execution-Ready Projects.
 
-Currently, two official plugins are available:
+HackSprint AI is an AI-powered execution engine that converts startup ideas, project concepts, and business problems into structured execution workflows.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Built for the **Unbound Creativity with TRAE Hackathon**.
 
-## React Compiler
+## Problem
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Most people have ideas but struggle with execution.
 
-## Expanding the ESLint configuration
+They switch between:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Google
+* ChatGPT
+* Notion
+* Trello
+* Documentation tools
+
+This creates fragmented workflows and slows down execution.
+
+## Solution
+
+HackSprint AI transforms a single idea into:
+
+* Competitor Analysis
+* Feature Recommendations
+* Tech Stack Suggestions
+* MVP Roadmap
+* Sprint Planning
+* Execution Workflow
+* Exportable Project Reports
+
+## Workflow
+
+Idea Input
+→ AI Research
+→ Project Planning
+→ Sprint Generation
+→ Execution Workflow
+→ PDF / JSON Export
+
+## Features
+
+* AI Workflow Generation
+* Competitor Analysis
+* MVP Roadmap Creation
+* Sprint Task Generation
+* Architecture Planning
+* PDF Export
+* JSON Export
+* Local Workflow Storage
+
+## Tech Stack
+
+### Frontend
+
+* React
+* Tailwind CSS
+* Framer Motion
+
+### AI
+
+* Groq API
+* Llama 3.1 Instant
+
+### Tools
+
+* jsPDF
+* html2canvas
+* Vite
+
+## Screenshots
+
+<img width="1920" height="943" alt="{55E17181-DDF2-4BC7-911B-33C9114EC811}" src="https://github.com/user-attachments/assets/7813f5d0-7379-455f-9e5c-694b86af7464" />
+
+
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd HackSprint-AI
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+Create a `.env` file:
+
+```env
+VITE_GROQ_API_KEY=your_api_key
+```
+
+## Future Scope
+
+* Team Collaboration
+* Workflow Sharing
+* Project Templates
+* Cloud Sync
+* Multi-Agent Planning
+
+## Team
+
+Team: Tech Brigadiers
+
+Built for the Grand Finale of the Unbound Creativity with TRAE Hackathon.
